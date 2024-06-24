@@ -158,7 +158,7 @@ if (!$result_kegiatan) {
 <body>
     <div class="top-bar">
         <div class="welcome-message">
-            Selamat datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?> (<?php echo htmlspecialchars($user['jabatan']); ?>)
+            Welcome, <?php echo htmlspecialchars($user['nama_lengkap']); ?> (<?php echo htmlspecialchars($user['jabatan']); ?>)
         </div>
         <form action="logout.php" method="post">
             <button type="submit" class="logout-button">Logout</button>
