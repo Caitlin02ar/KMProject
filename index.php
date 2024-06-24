@@ -1,67 +1,64 @@
+<?php
+
+include 'connection.php';
+session_start();
+
+if (!isset($_SESSION['id'])) {
+    echo "Session ID not set. Redirecting to login.";
+    header("Location: login.php");
+    exit();
+}
+
+$id = $_SESSION['id'];
+$sql = "SELECT nama_lengkap FROM user_table WHERE id = ?";
+$stmt = $conn->prepare($sql);
+if ($stmt === false) {
+    die("Prepare failed: " . $conn->error);
+}
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
+$user = $result->fetch_assoc();
+if (!$user) {
+    die("User not found.");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <title>Mahasiswa Dashboard</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #f0f2f5;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-        }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 26px;
-            color: #333;
-            text-align: center;
-        }
-        .add-button {
-            display: block;
-            width: 200px;
-            padding: 10px;
-            margin: 20px auto;
-            background: #007bff;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        .add-button:hover {
-            background: #0056b3;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background: #f7f7f7;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Mahasiswa Dashboard</h2>
-        <a href="input_data.php" class="add-button">Tambah Kegiatan</a>
-        <table>
+    <nav class="navbar" style="background-color: #F6F1E7;">
+        <div class="container-fluid d-flex">
+            <span class="navbar-brand mb-0 h1">
+                Selamat Datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?> 
+            </span>
+
+            <form action="logout.php" method="post" class="ms-auto">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="top-banner" style="padding:20px;">
+        <div class="alert alert-info" role="alert">
+            Mahasiswa dapat menginput data kegiatan untuk pengajuan SKKK Internal
+        </div>
+    </div>
+    
+    <div class="container-fluid px-4 table-container">
+    <h2>Mahasiswa Dashboard</h2>
+    <a href="input_data.php" class="btn btn-primary">Tambah Kegiatan</a>
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Unit Akademik/Pendukung</th>
@@ -71,6 +68,7 @@
                     <th>Jenis Kepanitiaan</th>
                     <th>Lingkup</th>
                     <th>Telepon HP</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,10 +80,18 @@
                     <td>1 tahun</td>
                     <td>Internasional</td>
                     <td>081234567890</td>
+                    <td>
+                        <a href="detail_pengajuan.php" class="btn btn-info d-flex align-items-center" style="white-space:nowrap;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="m8.93 6.588l-2.29.287l-.082.38l.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319c.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246c-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/>
+                            </svg>
+                            Detail
+                        </a>
+                    </td>
                 </tr>
-                <!-- Additional rows can be added here -->
             </tbody>
         </table>
     </div>
+
 </body>
 </html>

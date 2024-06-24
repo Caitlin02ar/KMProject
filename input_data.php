@@ -1,130 +1,144 @@
+<?php
+
+include 'connection.php';
+session_start();
+
+if (!isset($_SESSION['id'])) {
+    echo "Session ID not set. Redirecting to login.";
+    header("Location: login.php");
+    exit();
+}
+
+$id = $_SESSION['id'];
+$sql = "SELECT nama_lengkap FROM user_table WHERE id = ?";
+$stmt = $conn->prepare($sql);
+if ($stmt === false) {
+    die("Prepare failed: " . $conn->error);
+}
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
+$user = $result->fetch_assoc();
+if (!$user) {
+    die("User not found.");
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nama = $_POST['nama'];
+    $lembaga = $_POST['lembaga'];
+    $periode = $_POST['periode'];
+    $jenis = $_POST['jenis'];
+    $lingkup = $_POST['lingkup'];
+    
+    // Handle file upload
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["excel"]["name"]);
+    if (move_uploaded_file($_FILES["excel"]["tmp_name"], $target_file)) {
+        $file_path = $target_file;
+
+        // Insert data into the database using regular SQL
+        $sql = "INSERT INTO kegiatan (nama_kegiatan, lembaga, periode, jenis_kepanitiaan, lingkup, file_path)
+                VALUES ('$nama', '$lembaga', '$periode', '$jenis', '$lingkup', '$file_path')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+}
+$conn->close();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <title>Mahasiswa Entry Form</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #f0f2f5;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-        .form-group input,
-        .form-group select {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 0 auto;
-            background: #f7f7f7;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: #007bff;
-        }
-        .btn {
-            display: block;
-            width: calc(100% - 20px);
-            padding: 12px;
-            background: #007bff;
-            border: none;
-            border-radius: 6px;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin: 0 auto;
-        }
-        .btn:hover {
-            background: #0056b3;
-        }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 26px;
-            color: #333;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
-    <div class="header-container">
-        <h2>Selamat Datang, Pipel</h2>
-    </div>
-    <div class="container">
-        <h2>Mahasiswa Entry Form</h2>
-        <form action="process_mahasiswa.php" method="post">
-            <div class="form-group">
-                <label for="unit">Unit Akademik/Pendukung</label>
-                <select id="unit" name="unit">
-                    <option value="Fakultas Teknik">Fakultas Teknik Sipil</option>
-                    <option value="Fakultas Teknik">Fakultas Teknologi Industri</option>
-                    <option value="Fakultas Teknik">Fakultas Humaniora</option>
-                    <option value="Fakultas Teknik">Fakultas SBM</option>
-                    <option value="Fakultas Teknik">Fakultas Pendidikan </option>
-                    <option value="Fakultas Teknik">Fakultas Kedokteran</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="nama">Nama Kegiatan</label>
-                <input type="text" id="nama" name="nama" required>
-            </div>
-            <div class="form-group">
-                <label for="tempat">Tempat</label>
-                <input type="text" id="tempat" name="tempat" required>
-            </div>
-            <div class="form-group">
-                <label for="periode">Periode</label>
-                <select id="periode" name="periode">
-                    <option value="1-2023/2024">1-2024/2025</option>
-                    <option value="2-2023/2024">2-2024/2025</option>
-                    <!-- Add other options as needed -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="jenis">Jenis Kepanitiaan</label>
-                <select id="jenis" name="jenis">
-                    <option value="1 tahun">1 tahun</option>
-                    <option value="6 bulan">6 bulan</option>
-                    <!-- Add other options as needed -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="lingkup">Lingkup</label>
-                <select id="lingkup" name="lingkup">
-                    <option value="Internasional">Internasional</option>
-                    <option value="Internasional">Regional</option>
-                    <option value="Nasional">Nasional</option>
-                    <!-- Add other options as needed -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="telepon">Telepon HP</label>
-                <input type="text" id="telepon" name="telepon" required>
-            </div>
-            <button type="submit" class="btn">Tambah</button>
-        </form>
+
+    <nav class="navbar" style="background-color: #F6F1E7;">
+        <div class="container-fluid d-flex">
+            <span class="navbar-brand mb-0 h1">
+                Selamat Datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?> 
+            </span>
+
+            <form action="logout.php" method="post" class="ms-auto">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </nav>
+    
+    
+    <div class="container-box">
+        <div class="back-act">
+            <button class="btn btn-danger">Kembali</button>
+        </div>
+        <div class="container">
+            <h2>Mahasiswa Entry Form</h2>
+            <form action="" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nama">Nama Kegiatan</label>
+                            <input type="text" id="nama" name="nama" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lembaga">Lembaga</label>
+                            <select name="lembaga" id="lembaga" class="form-control">
+                                <option value="BEM">BEM</option>
+                                <option value="MPM">MPM</option>
+                                <option value="Persma">Persma</option>
+                                <option value="BPMF">BPMF</option>
+                                <option value="PPS">PPS</option>
+                                <option value="Pelma">Pelma</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="periode">Periode</label>
+                            <select id="periode" name="periode" class="form-control">
+                                <option value="1-2024/2025">1-2024/2025</option>
+                                <option value="2-2024/2025">2-2024/2025</option>
+                                <!-- Add other options as needed -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="jenis">Jenis Kepanitiaan</label>
+                            <select id="jenis" name="jenis" class="form-control">
+                                <option value="1 tahun">1 tahun</option>
+                                <option value="6 bulan">6 bulan</option>
+                                <!-- Add other options as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="lingkup">Lingkup</label>
+                            <select id="lingkup" name="lingkup" class="form-control">
+                                <option value="Internasional">Internasional</option>
+                                <option value="Regional">Regional</option>
+                                <option value="Nasional">Nasional</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="excel">Upload Excel</label>
+                            <input type="file" id="excel" name="excel" class="form-control" accept=".xls,.xlsx" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Tambah</button>
+            </form>
+        </div>    
     </div>
 </body>
 </html>
