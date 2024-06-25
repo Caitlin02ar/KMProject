@@ -25,6 +25,16 @@ $user = $result->fetch_assoc();
 if (!$user) {
     die("User not found.");
 }
+
+
+// Fetch the data to display in the table
+$sql = "SELECT * FROM kegiatan";
+$result = $conn->query($sql);
+if ($result === false) {
+    die("Query failed: " . $conn->error);
+}
+
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,34 +64,38 @@ if (!$user) {
             Mahasiswa dapat menginput data kegiatan untuk pengajuan SKKK Internal
         </div>
     </div>
+
+    <div class="buttons-action px-4">
+        <button class="btn btn-info">Verifikasi Pengajuan SKKK BEM</button>
+        <button class="btn btn-info">Verifikasi Pengajuan SKKK BAKA</button>
+    </div>
     
-    <div class="container-fluid px-4 table-container">
+    <div class="container-fluid px-4 table-container mahasiswa">
     <h2>Mahasiswa Dashboard</h2>
     <a href="input_data.php" class="btn btn-primary">Tambah Kegiatan</a>
-        <table class="table table-bordered">
+    <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Unit Akademik/Pendukung</th>
                     <th>Nama Kegiatan</th>
-                    <th>Tempat</th>
+                    <th>Lembaga</th>
                     <th>Periode</th>
                     <th>Jenis Kepanitiaan</th>
                     <th>Lingkup</th>
-                    <th>Telepon HP</th>
+                    <th>File Path</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
+                <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td>Fakultas Sastra</td>
-                    <td>Contoh Kegiatan</td>
-                    <td>Contoh Tempat</td>
-                    <td>1-2023/2024</td>
-                    <td>1 tahun</td>
-                    <td>Internasional</td>
-                    <td>081234567890</td>
+                    <td><?php echo htmlspecialchars($row['nama_kegiatan']); ?></td>
+                    <td><?php echo htmlspecialchars($row['lembaga']); ?></td>
+                    <td><?php echo htmlspecialchars($row['periode']); ?></td>
+                    <td><?php echo htmlspecialchars($row['jenis_kepanitiaan']); ?></td>
+                    <td><?php echo htmlspecialchars($row['lingkup']); ?></td>
+                    <td><a href="<?php echo htmlspecialchars($row['file_path']); ?>" target="_blank">Download</a></td>
                     <td>
-                        <a href="detail_pengajuan.php" class="btn btn-info d-flex align-items-center" style="white-space:nowrap;">
+                        <a href="detail_pengajuan.php?id=<?php echo $row['id']; ?>" class="btn btn-info d-flex align-items-center" style="white-space:nowrap;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 16 16">
                                 <path fill="currentColor" d="m8.93 6.588l-2.29.287l-.082.38l.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319c.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246c-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/>
                             </svg>
@@ -89,6 +103,7 @@ if (!$user) {
                         </a>
                     </td>
                 </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>

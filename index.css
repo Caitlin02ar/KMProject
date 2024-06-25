@@ -49,6 +49,16 @@ th {
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.mahasiswa {
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border-top: 0.5px solid #e8e8e8;
 }
 
 .container-box{
@@ -82,6 +92,52 @@ th {
 .form-group input:focus,
 .form-group select:focus {
     border-color: #007bff;
+}
+
+.container-detail {
+    margin-top: 20px;
+}
+
+.isi-detail .box {
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    width: 80%;
+    margin: 50px auto;
+    gap: 20px;
+}
+
+.label-content span {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    width: 90%; /* Ensure the span takes up the full width of the container */
+    padding-left: 10px; /* Optional: add some padding to the left if needed */
+    white-space: nowrap;
+}
+
+.label-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.box-content span {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    width: 50%;
+    padding-left: 10px;
+}
+
+.box-content {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.buttons-action {
+    margin-bottom: 10px;
 }
 
 

@@ -39,14 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (move_uploaded_file($_FILES["excel"]["tmp_name"], $target_file)) {
         $file_path = $target_file;
 
-        // Insert data into the database using regular SQL
+        // Insert data into the database using prepared statements
         $sql = "INSERT INTO kegiatan (nama_kegiatan, lembaga, periode, jenis_kepanitiaan, lingkup, file_path)
-                VALUES ('$nama', '$lembaga', '$periode', '$jenis', '$lingkup', '$file_path')";
-
-        if ($conn->query($sql) === TRUE) {
+                VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            die("Prepare failed: " . $conn->error);
+        }
+        $stmt->bind_param("ssssss", $nama, $lembaga, $periode, $jenis, $lingkup, $file_path);
+        if ($stmt->execute()) {
             echo "New record created successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $stmt->error;
         }
     } else {
         echo "Sorry, there was an error uploading your file.";
@@ -81,12 +85,12 @@ $conn->close();
     
     
     <div class="container-box">
-        <div class="back-act">
+        <form action="index.php" class="btn-act">
             <button class="btn btn-danger">Kembali</button>
-        </div>
+        </form>
         <div class="container">
             <h2>Mahasiswa Entry Form</h2>
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
