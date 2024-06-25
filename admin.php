@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 
 // Fetch user information
 $id = $_SESSION['id'];
-$sql = "SELECT nama_lengkap, jabatan FROM user_table_table WHERE id = ?";
+$sql = "SELECT nama_lengkap, jabatan FROM user_table WHERE id = ?";
 $stmt = $conn->prepare($sql);
 if ($stmt === false) {
     die("Prepare failed: " . $conn->error);
@@ -39,7 +39,6 @@ if (!$user) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>

@@ -45,7 +45,6 @@ $conn->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <title>Mahasiswa Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav class="navbar" style="background-color: #F6F1E7;">
