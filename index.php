@@ -38,19 +38,23 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <title>Mahasiswa Dashboard</title>
 </head>
+
 <body>
     <nav class="navbar" style="background-color: #F6F1E7;">
         <div class="container-fluid d-flex">
             <span class="navbar-brand mb-0 h1">
-                Selamat Datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?> 
+                Selamat Datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?>
             </span>
 
             <form action="logout.php" method="post" class="ms-auto">
@@ -66,14 +70,14 @@ $conn->close();
     </div>
 
     <div class="buttons-action px-4">
-        <button class="btn btn-info">Verifikasi Pengajuan SKKK BEM</button>
-        <button class="btn btn-info">Verifikasi Pengajuan SKKK BAKA</button>
+        <a href="verifikasi_BEM.php" class="btn btn-info">Verifikasi Pengajuan SKKK BEM</a>
+        <a href="verifikasi_BAKA.php" class="btn btn-info">Validasi Data (Ke BAKA)</a>
     </div>
-    
+
     <div class="container-fluid px-4 table-container mahasiswa">
-    <h2>Mahasiswa Dashboard</h2>
-    <a href="input_data.php" class="btn btn-primary">Tambah Kegiatan</a>
-    <table class="table table-bordered">
+        <h2>Mahasiswa Dashboard</h2>
+        <a href="input_data.php" class="btn btn-primary">Tambah Kegiatan</a>
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Nama Kegiatan</th>
@@ -81,32 +85,36 @@ $conn->close();
                     <th>Periode</th>
                     <th>Jenis Kepanitiaan</th>
                     <th>Lingkup</th>
-                    <th>File Path</th>
+                    <th>File Path Excel</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['nama_kegiatan']); ?></td>
-                    <td><?php echo htmlspecialchars($row['lembaga']); ?></td>
-                    <td><?php echo htmlspecialchars($row['periode']); ?></td>
-                    <td><?php echo htmlspecialchars($row['jenis_kepanitiaan']); ?></td>
-                    <td><?php echo htmlspecialchars($row['lingkup']); ?></td>
-                    <td><a href="<?php echo htmlspecialchars($row['file_path']); ?>" target="_blank">Download</a></td>
-                    <td>
-                        <a href="detail_pengajuan.php?id=<?php echo $row['id']; ?>" class="btn btn-info d-flex align-items-center" style="white-space:nowrap;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 16 16">
-                                <path fill="currentColor" d="m8.93 6.588l-2.29.287l-.082.38l.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319c.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246c-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/>
-                            </svg>
-                            Detail
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['nama_kegiatan']); ?></td>
+                        <td><?php echo htmlspecialchars($row['lembaga']); ?></td>
+                        <td><?php echo htmlspecialchars($row['periode']); ?></td>
+                        <td><?php echo htmlspecialchars($row['jenis_kepanitiaan']); ?></td>
+                        <td><?php echo htmlspecialchars($row['lingkup']); ?></td>
+                        <td><a href="<?php echo htmlspecialchars($row['file_path_excel']); ?>" target="_blank">Download</a>
+                        </td>
+                        <td>
+                            <a href="detail_pengajuan.php?id=<?php echo $row['id']; ?>"
+                                class="btn btn-info d-flex align-items-center" style="white-space:nowrap;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 16 16">
+                                    <path fill="currentColor"
+                                        d="m8.93 6.588l-2.29.287l-.082.38l.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319c.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246c-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0a1 1 0 0 1 2 0" />
+                                </svg>
+                                Detail
+                            </a>
+                        </td>
+                    </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
     </div>
 
 </body>
+
 </html>

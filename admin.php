@@ -28,9 +28,14 @@ if (!$user) {
     die("User not found.");
 }
 
+// Fetch the data to display in the table
+$sql_kegiatan = "SELECT * FROM kegiatan";
+$result_kegiatan = $conn->query($sql_kegiatan);
+if ($result_kegiatan === false) {
+    die("Query failed: " . $conn->error);
+}
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,12 +44,16 @@ if (!$user) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Admin Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7MU5L5sI5Tfnv2FZq4x0p5bF5dyIs6qrD6g"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="top-bar">
         <div class="welcome-message">
-            Welcome, <?php echo htmlspecialchars($user['nama_lengkap']); ?> (<?php echo htmlspecialchars($user['jabatan']); ?>)
+            Welcome, <?php echo htmlspecialchars($user['nama_lengkap']); ?>
+            (<?php echo htmlspecialchars($user['jabatan']); ?>)
         </div>
         <form action="logout.php" method="post">
             <button type="submit" class="logout-button">Logout</button>
@@ -52,17 +61,17 @@ if (!$user) {
     </div>
     <div class="container">
         <h2>Admin Dashboard</h2>
-        <a href="input_data.php" class="add-button">Tambah Kegiatan</a>
         <table>
             <thead>
                 <tr>
-                    <th>Unit Akademik/Pendukung</th>
                     <th>Nama Kegiatan</th>
-                    <th>Tempat</th>
+                    <th>Lembaga</th>
                     <th>Periode</th>
                     <th>Jenis Kepanitiaan</th>
                     <th>Lingkup</th>
-                    <th>Telepon HP</th>
+                    <th>File Path Excel</th>
+                    <th>File Path Surat</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -71,24 +80,32 @@ if (!$user) {
                 if ($result_kegiatan->num_rows > 0) {
                     while ($row = $result_kegiatan->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row["unit"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["nama"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["tempat"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["nama_kegiatan"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["lembaga"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["periode"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["jenis"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["jenis_kepanitiaan"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["lingkup"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($row["telepon"]) . "</td>";
+                        echo "<td><a href='" . htmlspecialchars($row["file_path_excel"]) . "' target='_blank'>Download</a></td>";
+                        echo "<td><a href='" . htmlspecialchars($row["file_path_surat"]) . "' target='_blank'>Download</a></td>";
+                        echo "<td class='status'>" . htmlspecialchars($row["status"]) . "</td>";
                         echo "<td class='action-buttons'>";
-                        echo "<button class='btn btn-detail'>Detail</button>";
-                        echo "<button class='btn btn-accept'>Accept</button>";
-                        echo "<button class='btn btn-reject'>Reject</button>";
+                        echo "<a href='detail_admin.php?id=" . $row['id'] . "' class='btn btn-detail'>Detail</a>";
+                        echo "<form action='update_status.php' method='post' style='display:inline;'>";
+                        echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+                        echo "<input type='hidden' name='status' value='disetujui'>";
+                        echo "<button type='submit' class='btn btn-accept'>Accept</button>";
+                        echo "</form>";
+                        echo "<form action='update_status.php' method='post' style='display:inline;'>";
+                        echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+                        echo "<input type='hidden' name='status' value='ditolak'>";
+                        echo "<button type='submit' class='btn btn-reject'>Reject</button>";
+                        echo "</form>";
                         echo "</td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='8'>No data available</td></tr>";
+                    echo "<tr><td colspan='9'>No data available</td></tr>";
                 }
-                $conn->close();
                 ?>
             </tbody>
         </table>
@@ -96,3 +113,7 @@ if (!$user) {
 </body>
 
 </html>
+
+<?php
+$conn->close();
+?>

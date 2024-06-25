@@ -32,23 +32,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $periode = $_POST['periode'];
     $jenis = $_POST['jenis'];
     $lingkup = $_POST['lingkup'];
-    
+
     // Handle file upload
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["excel"]["name"]);
     if (move_uploaded_file($_FILES["excel"]["tmp_name"], $target_file)) {
-        $file_path = $target_file;
+        $file_path_excel = $target_file;
+        $file_path_surat = "uploads/contoh_surat.docx"; // Predefined file path for the surat
 
         // Insert data into the database using prepared statements
-        $sql = "INSERT INTO kegiatan (nama_kegiatan, lembaga, periode, jenis_kepanitiaan, lingkup, file_path)
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO kegiatan (nama_kegiatan, lembaga, periode, jenis_kepanitiaan, lingkup, file_path_excel, file_path_surat, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?, 'diproses')";
         $stmt = $conn->prepare($sql);
         if ($stmt === false) {
             die("Prepare failed: " . $conn->error);
         }
-        $stmt->bind_param("ssssss", $nama, $lembaga, $periode, $jenis, $lingkup, $file_path);
+        $stmt->bind_param("sssssss", $nama, $lembaga, $periode, $jenis, $lingkup, $file_path_excel, $file_path_surat);
         if ($stmt->execute()) {
-            echo "New record created successfully";
+            echo "<script>
+                    alert('Data kegiatan berhasil ditambahkan');
+                    window.location.href = 'index.php';
+                  </script>";
         } else {
             echo "Error: " . $stmt->error;
         }
@@ -61,20 +65,24 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <title>Mahasiswa Entry Form</title>
 </head>
+
 <body>
 
     <nav class="navbar" style="background-color: #F6F1E7;">
         <div class="container-fluid d-flex">
             <span class="navbar-brand mb-0 h1">
-                Selamat Datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?> 
+                Selamat Datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?>
             </span>
 
             <form action="logout.php" method="post" class="ms-auto">
@@ -82,8 +90,7 @@ $conn->close();
             </form>
         </div>
     </nav>
-    
-    
+
     <div class="container-box">
         <form action="index.php" class="btn-act">
             <button class="btn btn-danger">Kembali</button>
@@ -136,13 +143,15 @@ $conn->close();
                         </div>
                         <div class="form-group">
                             <label for="excel">Upload Excel</label>
-                            <input type="file" id="excel" name="excel" class="form-control" accept=".xls,.xlsx" required>
+                            <input type="file" id="excel" name="excel" class="form-control" accept=".xls,.xlsx"
+                                required>
                         </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Tambah</button>
             </form>
-        </div>    
+        </div>
     </div>
 </body>
+
 </html>
