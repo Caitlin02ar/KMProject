@@ -1,0 +1,134 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+}
+.top-bar {
+  background: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.top-bar .welcome-message {
+  font-size: 16px;
+}
+.top-bar .logout-button {
+  background: #dc3545;
+  border: none;
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  overflow-x: auto;
+}
+h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #333;
+  text-align: center;
+}
+.add-button {
+  display: block;
+  width: 200px;
+  padding: 10px;
+  margin: 20px auto;
+  background: #007bff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 16px;
+}
+.add-button:hover {
+  background: #0056b3;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+table, th, td {
+  border: 1px solid #ddd;
+}
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+th {
+  background: #f7f7f7;
+}
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.btn-detail {
+  background: #28a745;
+}
+.btn-detail:hover {
+  background: #218838;
+}
+.btn-accept {
+  background: #007bff;
+}
+.btn-accept:hover {
+  background: #0056b3;
+}
+.btn-reject {
+  background: #dc3545;
+}
+.btn-reject:hover {
+  background: #c82333;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+}
+h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #333;
+  text-align: center;
+}
+.add-button {
+  display: block;
+  width: 200px;
+  padding: 10px;
+  margin: 20px auto;
+  background: #007bff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 16px;
+}
+.add-button:hover {
+  background: #0056b3;
+}

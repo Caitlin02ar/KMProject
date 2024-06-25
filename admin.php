@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 
 // Fetch user information
 $id = $_SESSION['id'];
-$sql = "SELECT nama_lengkap, jabatan FROM user_table WHERE id = ?";
+$sql = "SELECT nama_lengkap, jabatan FROM user_table_table WHERE id = ?";
 $stmt = $conn->prepare($sql);
 if ($stmt === false) {
     die("Prepare failed: " . $conn->error);
@@ -33,12 +33,15 @@ if (!$user) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="top-bar">
         <div class="welcome-message">
@@ -67,7 +70,7 @@ if (!$user) {
             <tbody>
                 <?php
                 if ($result_kegiatan->num_rows > 0) {
-                    while($row = $result_kegiatan->fetch_assoc()) {
+                    while ($row = $result_kegiatan->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row["unit"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["nama"]) . "</td>";
@@ -92,4 +95,5 @@ if (!$user) {
         </table>
     </div>
 </body>
+
 </html>
