@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2024 at 07:18 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Waktu pembuatan: 25 Jun 2024 pada 06.34
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kegiatan`
+-- Struktur dari tabel `kegiatan`
 --
 
 CREATE TABLE `kegiatan` (
@@ -38,28 +38,28 @@ CREATE TABLE `kegiatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `kegiatan`
+-- Dumping data untuk tabel `kegiatan`
 --
 
 INSERT INTO `kegiatan` (`id`, `nama_kegiatan`, `lembaga`, `periode`, `jenis_kepanitiaan`, `lingkup`, `file_path`) VALUES
-(1, 'UKM', 'Persma', '1-2024/2025', '1 tahun', 'Internasional', 'uploads/dataset-stroke-testing.xlsx');
+(1, 'Open House 2024', 'Badan Eksekutif Mahasiswa', '1-2024/2025', '1 tahun', 'Universitas', 'uploads/contoh_surat.docx');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `kegiatan`
+-- Indeks untuk tabel `kegiatan`
 --
 ALTER TABLE `kegiatan`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `kegiatan`
+-- AUTO_INCREMENT untuk tabel `kegiatan`
 --
 ALTER TABLE `kegiatan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
