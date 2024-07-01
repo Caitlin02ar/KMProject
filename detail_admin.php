@@ -42,10 +42,6 @@ $conn->close();
             margin-top: 20px;
         }
 
-        .isi-detail {
-            margin: 20px;        
-        }
-
         .form-group {
             margin-bottom: 15px;
         }
@@ -78,54 +74,52 @@ $conn->close();
         </form>
     </div>
 
-    <div class="container">
-        <form class="isi-detail">
-            <div class="form-group">
-                <label for="nama_kegiatan" class="form-label">Nama Kegiatan</label>
-                <input type="text" id="nama_kegiatan" class="form-control" value="<?php echo htmlspecialchars($activity['nama_kegiatan']); ?>" disabled>
-            </div>
+    <form class="isi-detail">
+        <div class="form-group">
+            <label for="nama_kegiatan" class="form-label">Nama Kegiatan</label>
+            <input type="text" id="nama_kegiatan" class="form-control" value="<?php echo htmlspecialchars($activity['nama_kegiatan']); ?>" disabled>
+        </div>
 
-            <div class="form-group">
-                <label for="lembaga" class="form-label">Lembaga</label>
-                <input type="text" id="lembaga" class="form-control" value="<?php echo htmlspecialchars($activity['lembaga']); ?>" disabled>
-            </div>
+        <div class="form-group">
+            <label for="lembaga" class="form-label">Lembaga</label>
+            <input type="text" id="lembaga" class="form-control" value="<?php echo htmlspecialchars($activity['lembaga']); ?>" disabled>
+        </div>
 
-            <div class="form-group">
-                <label for="periode" class="form-label">Periode</label>
-                <input type="text" id="periode" class="form-control" value="<?php echo htmlspecialchars($activity['periode']); ?>" disabled>
-            </div>
+        <div class="form-group">
+            <label for="periode" class="form-label">Periode</label>
+            <input type="text" id="periode" class="form-control" value="<?php echo htmlspecialchars($activity['periode']); ?>" disabled>
+        </div>
 
-            <div class="form-group">
-                <label for="jenis_kepanitiaan" class="form-label">Jenis Kepanitiaan</label>
-                <input type="text" id="jenis_kepanitiaan" class="form-control" value="<?php echo htmlspecialchars($activity['jenis_kepanitiaan']); ?>" disabled>
-            </div>
+        <div class="form-group">
+            <label for="jenis_kepanitiaan" class="form-label">Jenis Kepanitiaan</label>
+            <input type="text" id="jenis_kepanitiaan" class="form-control" value="<?php echo htmlspecialchars($activity['jenis_kepanitiaan']); ?>" disabled>
+        </div>
 
-            <div class="form-group">
-                <label for="lingkup" class="form-label">Lingkup</label>
-                <input type="text" id="lingkup" class="form-control" value="<?php echo htmlspecialchars($activity['lingkup']); ?>" disabled>
-            </div>
+        <div class="form-group">
+            <label for="lingkup" class="form-label">Lingkup</label>
+            <input type="text" id="lingkup" class="form-control" value="<?php echo htmlspecialchars($activity['lingkup']); ?>" disabled>
+        </div>
 
-            <div class="form-group">
-                <label for="file_path_excel" class="form-label">File Excel Peserta</label>
-                <a href="<?php echo htmlspecialchars($activity['file_path_excel']); ?>" target="_blank" class="btn btn-info download-button">Download File Excel</a>
-            </div>
+        <div class="form-group">
+            <label for="file_path_excel" class="form-label">File Excel Peserta</label>
+            <a href="<?php echo htmlspecialchars($activity['file_path_excel']); ?>" target="_blank" class="btn btn-info download-button">Download File Excel</a>
+        </div>
 
-            <div class="form-group">
-                <label for="file_path_surat" class="form-label">File Surat Validasi BEM</label>
-                <a href="<?php echo htmlspecialchars($activity['file_path_surat']); ?>" target="_blank" class="btn btn-info download-button">Download File Surat</a>
-            </div>
+        <div class="form-group">
+            <label for="file_path_surat" class="form-label">File Surat Validasi BEM</label>
+            <a href="<?php echo htmlspecialchars($activity['file_path_surat']); ?>" target="_blank" class="btn btn-info download-button">Download File Surat</a>
+        </div>
 
-            <div class="form-group">
-                <label for="status" class="form-label">Status</label>
-                <input type="text" id="status" class="form-control" value="<?php echo htmlspecialchars($activity['status_baka']); ?>" disabled>
-            </div>
+        <div class="form-group">
+            <label for="status" class="form-label">Status</label>
+            <input type="text" id="status" class="form-control" value="<?php echo htmlspecialchars($activity['status_baka']); ?>" disabled>
+        </div>
 
-            <div class="button-act mt-3">
-                <button class="btn btn-warning" <?php echo $activity['status_baka'] == 'disetujui' || $activity['status_baka'] == 'diproses' ? 'disabled' : ''; ?>>Revisi Data</button>
-                <button class="btn btn-primary" <?php echo $activity['status_baka'] == 'ditolak' || $activity['status_baka'] == 'diproses' ? 'disabled' : ''; ?>>Validasi Data</button>
-            </div>
-        </form>
-    </div>
+        <div class="button-act mt-3">
+            <button class="btn btn-warning" <?php echo $activity['status_baka'] == 'disetujui' || $activity['status_baka'] == 'diproses' ? 'disabled' : ''; ?>>Revisi Data</button>
+            <button class="btn btn-primary" <?php echo $activity['status_baka'] == 'ditolak' || $activity['status_baka'] == 'diproses' ? 'disabled' : ''; ?>>Validasi Data</button>
+        </div>
+    </form>
 </body>
 
 </html>
