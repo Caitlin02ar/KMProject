@@ -70,36 +70,33 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <title>Mahasiswa Entry Form</title>
 </head>
 
 <body>
-
-    <nav class="navbar" style="background-color: #F6F1E7;">
-        <div class="container-fluid d-flex">
-            <span class="navbar-brand mb-0 h1">
-                Selamat Datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?>
+    <nav class="navbar box-shadow" style="background-color: #007bff;">
+        <div class="container-fluid d-flex align-items-center">
+            <span class="navbar-brand mb-0 h1 ms-4 text-light">
+                Selamat Datang, <?php echo htmlspecialchars(ucwords($user['nama_lengkap'])); ?>
             </span>
-
-            <form action="logout.php" method="post" class="ms-auto">
+            <form action="logout.php" method="post" class="d-flex align-items-center mt-2 mx-4">
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
         </div>
     </nav>
 
+    <div class="buttons-action px-4 ms-4 mt-4">
+        <a href="index.php" class="btn btn-danger">Kembali</a>
+    </div>
+
     <div class="container-box">
-        <form action="index.php" class="btn-act">
-            <button class="btn btn-danger">Kembali</button>
-        </form>
         <div class="container">
             <h2>Mahasiswa Entry Form</h2>
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-12">
                         <div class="form-group">
                             <label for="nama">Nama Kegiatan</label>
                             <input type="text" id="nama" name="nama" class="form-control" required>
@@ -120,17 +117,13 @@ $conn->close();
                             <select id="periode" name="periode" class="form-control">
                                 <option value="1-2024/2025">1-2024/2025</option>
                                 <option value="2-2024/2025">2-2024/2025</option>
-                                <!-- Add other options as needed -->
                             </select>
                         </div>
-                    </div>
-                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="jenis">Jenis Kepanitiaan</label>
                             <select id="jenis" name="jenis" class="form-control">
                                 <option value="1 tahun">1 tahun</option>
                                 <option value="6 bulan">6 bulan</option>
-                                <!-- Add other options as needed -->
                             </select>
                         </div>
                         <div class="form-group">
@@ -143,12 +136,11 @@ $conn->close();
                         </div>
                         <div class="form-group">
                             <label for="excel">Upload Excel</label>
-                            <input type="file" id="excel" name="excel" class="form-control" accept=".xls,.xlsx"
-                                required>
+                            <input type="file" id="excel" name="excel" class="form-control pl-2" accept=".xls,.xlsx" required>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+                <button type="submit" class="btn btn-primary d-flex text-align-end ms-2">Tambah</button>
             </form>
         </div>
     </div>

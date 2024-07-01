@@ -132,7 +132,7 @@ h2 {
 <body>
     <div class="container">
         <div class="login-box">
-            <img src="Logo Petra.png" alt="Logo Universitas Kristen Petra" class="logo">
+            <img src="logo_petra.png" alt="Logo Universitas Kristen Petra" class="logo">
             <h2>Login Universitas</h2>
             <form action="login.php" method="post">
                 <div class="textbox">

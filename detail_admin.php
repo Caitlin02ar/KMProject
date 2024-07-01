@@ -117,12 +117,12 @@ $conn->close();
 
             <div class="form-group">
                 <label for="status" class="form-label">Status</label>
-                <input type="text" id="status" class="form-control" value="<?php echo htmlspecialchars($activity['status']); ?>" disabled>
+                <input type="text" id="status" class="form-control" value="<?php echo htmlspecialchars($activity['status_baka']); ?>" disabled>
             </div>
 
             <div class="button-act mt-3">
-                <button class="btn btn-warning" <?php echo $activity['status'] == 'disetujui' || $activity['status'] == 'diproses' ? 'disabled' : ''; ?>>Revisi Data</button>
-                <button class="btn btn-primary" <?php echo $activity['status'] == 'ditolak' || $activity['status'] == 'diproses' ? 'disabled' : ''; ?>>Validasi Data</button>
+                <button class="btn btn-warning" <?php echo $activity['status_baka'] == 'disetujui' || $activity['status_baka'] == 'diproses' ? 'disabled' : ''; ?>>Revisi Data</button>
+                <button class="btn btn-primary" <?php echo $activity['status_baka'] == 'ditolak' || $activity['status_baka'] == 'diproses' ? 'disabled' : ''; ?>>Validasi Data</button>
             </div>
         </form>
     </div>

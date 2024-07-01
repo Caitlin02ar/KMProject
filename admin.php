@@ -44,9 +44,7 @@ if ($result_kegiatan === false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Admin Dashboard</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7MU5L5sI5Tfnv2FZq4x0p5bF5dyIs6qrD6g"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7MU5L5sI5Tfnv2FZq4x0p5bF5dyIs6qrD6g" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -71,7 +69,8 @@ if ($result_kegiatan === false) {
                     <th>Lingkup</th>
                     <th>File Path Excel</th>
                     <th>File Path Surat</th>
-                    <th>Status</th>
+                    <th>Status BEM</th>
+                    <th>Status BAKA</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -87,7 +86,8 @@ if ($result_kegiatan === false) {
                         echo "<td>" . htmlspecialchars($row["lingkup"]) . "</td>";
                         echo "<td><a href='" . htmlspecialchars($row["file_path_excel"]) . "' target='_blank'>Download</a></td>";
                         echo "<td><a href='" . htmlspecialchars($row["file_path_surat"]) . "' target='_blank'>Download</a></td>";
-                        echo "<td class='status'>" . htmlspecialchars($row["status"]) . "</td>";
+                        echo "<td class='status'>" . htmlspecialchars($row["status_bem"]) . "</td>";
+                        echo "<td class='status'>" . htmlspecialchars($row["status_baka"]) . "</td>";
                         echo "<td class='action-buttons'>";
                         echo "<a href='detail_admin.php?id=" . $row['id'] . "' class='btn btn-detail'>Detail</a>";
                         echo "<form action='update_status.php' method='post' style='display:inline;'>";

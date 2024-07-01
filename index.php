@@ -26,7 +26,6 @@ if (!$user) {
     die("User not found.");
 }
 
-
 // Fetch the data to display in the table
 $sql = "SELECT * FROM kegiatan";
 $result = $conn->query($sql);
@@ -51,32 +50,31 @@ $conn->close();
 </head>
 
 <body>
-    <nav class="navbar" style="background-color: #F6F1E7;">
-        <div class="container-fluid d-flex">
-            <span class="navbar-brand mb-0 h1">
-                Selamat Datang, <?php echo htmlspecialchars($user['nama_lengkap']); ?>
+    <nav class="navbar box-shadow" style="background-color: #007bff;">
+        <div class="container-fluid d-flex align-items-center">
+            <span class="navbar-brand mb-0 h1 ms-4 text-light">
+                Selamat Datang, <?php echo htmlspecialchars(ucwords($user['nama_lengkap'])); ?>
             </span>
-
-            <form action="logout.php" method="post" class="ms-auto">
+            <form action="logout.php" method="post" class="d-flex align-items-center mt-2 mx-4">
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
         </div>
     </nav>
 
     <div class="top-banner" style="padding:20px;">
-        <div class="alert alert-info" role="alert">
-            Mahasiswa dapat menginput data kegiatan untuk pengajuan SKKK Internal
+        <div class="alert alert-info br-10 box-shadow" role="alert">
+            Mahasiswa dapat menginput data kegiatan untuk pengajuan SKKK Kegiatan
         </div>
     </div>
 
-    <div class="buttons-action px-4">
-        <a href="verifikasi_BEM.php" class="btn btn-info">Verifikasi Pengajuan SKKK BEM</a>
-        <a href="verifikasi_BAKA.php" class="btn btn-info">Validasi Data (Ke BAKA)</a>
+    <div class="buttons-action ms-4">
+        <a href="verifikasi_BEM.php" class="btn btn-primary br-10">Verifikasi Pengajuan SKKK (Ke BEM)</a>
+        <a href="verifikasi_BAKA.php" class="btn btn-primary br-10">Validasi Data (Ke BAKA)</a>
     </div>
 
-    <div class="container-fluid px-4 table-container mahasiswa">
+    <div class="container-fluid table-container mahasiswa">
         <h2>Mahasiswa Dashboard</h2>
-        <a href="input_data.php" class="btn btn-primary">Tambah Kegiatan</a>
+        <a href="input_data.php" class="btn btn-primary br-10">Tambah Kegiatan</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -101,8 +99,8 @@ $conn->close();
                         </td>
                         <td>
                             <a href="detail_pengajuan.php?id=<?php echo $row['id']; ?>"
-                                class="btn btn-info d-flex align-items-center" style="white-space:nowrap;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 16 16">
+                                class="btn btn-primary d-flex align-items-center justify-content-center light-blue">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.5em" viewBox="0 0 16 16">
                                     <path fill="currentColor"
                                         d="m8.93 6.588l-2.29.287l-.082.38l.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319c.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246c-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0a1 1 0 0 1 2 0" />
                                 </svg>

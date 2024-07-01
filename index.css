@@ -5,7 +5,6 @@ body {
     padding: 0px;
 }
 
-
 .table-container {
     max-width: 95%;
     margin: 0 auto;
@@ -14,6 +13,7 @@ body {
     border-radius: 10px;
     padding: 20px;
 }
+
 h2 {
     margin-bottom: 20px;
     font-size: 26px;
@@ -41,10 +41,8 @@ th {
     background: #f7f7f7;
 }
 
-
 .container{
     max-width: 800px;
-    margin: 40px auto;
     padding: 20px;
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -62,21 +60,20 @@ th {
 }
 
 .container-box{
-    max-width: 1000px;
-    margin: 20px auto;
     padding: 20px;
 }
-
 
 .form-group {
     margin-bottom: 20px;
 }
+
 .form-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
     color: #333;
 }
+
 .form-group input,
 .form-group select {
     width: calc(100% - 20px);
@@ -89,6 +86,7 @@ th {
     outline: none;
     transition: border-color 0.3s ease;
 }
+
 .form-group input:focus,
 .form-group select:focus {
     border-color: #007bff;
@@ -140,4 +138,61 @@ th {
     margin-bottom: 10px;
 }
 
+.br-10 {
+    border-radius: 10px !important;
+}
+
+.box-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.light-blue {
+    opacity: 0.8 !important;
+}
+
+.label-content {
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.box-content {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.button-act {
+    margin-top: 20px;
+    text-align: end;
+}
+
+.navbar {
+    background-color: #007bff;
+}
+
+.navbar-brand {
+    color: #fff;
+}
+
+.container-detail {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.isi-detail {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1200px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box {
+    margin-bottom: 15px;
+}
 
