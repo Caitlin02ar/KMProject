@@ -52,7 +52,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Universitas</title>
+    <title>Pengajuan SKKK Kegiatan</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <style>
@@ -133,7 +133,7 @@ h2 {
     <div class="container">
         <div class="login-box">
             <img src="logo_petra.png" alt="Logo Universitas Kristen Petra" class="logo">
-            <h2>Login Universitas</h2>
+            <h2>Login Pengajuan SKKK Kegiatan</h2>
             <form action="login.php" method="post">
                 <div class="textbox">
                     <input type="email" placeholder="Email" name="email" required>
